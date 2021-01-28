@@ -13,6 +13,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
+import static academy.devdojo.SpringBoot2.util.AnimeCreator.createAnimeToBeSaved;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -25,7 +26,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save persists anime when Successful")
     void save_PersistenteAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = createAnimeToBeSaved();
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
         Assertions.assertThat(animeSaved).isNotNull();
         Assertions.assertThat(animeSaved.getId()).isNotNull();
@@ -37,7 +38,7 @@ class AnimeRepositoryTest {
     @DisplayName("Save updates anime when Successful")
     void save_UpdatesAnime_WhenSuccessful(){
 
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = createAnimeToBeSaved();
 
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
@@ -57,7 +58,7 @@ class AnimeRepositoryTest {
     @DisplayName("Save removes anime when Successful")
     void delete_RemovesAnime_WhenSuccessful(){
 
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = createAnimeToBeSaved();
 
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
@@ -73,7 +74,7 @@ class AnimeRepositoryTest {
     @DisplayName("Find By Name returns list of anime when Successful")
     void findByName_ReturnsListOfAnime_WhenSuccessful(){
 
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = createAnimeToBeSaved();
 
         Anime animeSaved = this.animeRepository.save(animeToBeSaved);
 
@@ -111,11 +112,4 @@ class AnimeRepositoryTest {
                 .withMessageContaining("The anime name cannot be empty");
 
     }
-
-    private Anime createAnime(){
-        return Anime.builder()
-                .name("Hajime no Ippo")
-                .build();
-    }
-
 }
