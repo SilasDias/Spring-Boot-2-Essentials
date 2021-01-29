@@ -4,9 +4,6 @@ import academy.devdojo.SpringBoot2.domain.Anime;
 import academy.devdojo.SpringBoot2.requests.AnimePostRequestBody;
 import academy.devdojo.SpringBoot2.requests.AnimePutRequestBody;
 import academy.devdojo.SpringBoot2.service.AnimeService;
-import academy.devdojo.SpringBoot2.util.DateUtil;
-
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -16,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
