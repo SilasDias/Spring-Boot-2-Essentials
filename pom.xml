@@ -17,6 +17,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 	</properties>
@@ -85,6 +87,28 @@
         </dependency>
     </dependencies>
 
+	<profiles>
+		<profile>
+			<id>integration-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${maven-surefire-plugin.version}</version>
+						<configuration>
+							<testFailureIgnore>true</testFailureIgnore>
+							<includes>
+								<include>**/*Test.*</include>
+								<include>**/*IT.*</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -95,7 +119,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
+
 				<configuration>
+					<fork>true</fork>
+					<executable>/usr/lib/jvm/java-11-openjdk-amd64/bin/javac</executable>
 					<source>11</source>
 					<target>11</target>
 					<annotationProcessorPaths>
@@ -110,6 +137,7 @@
 							<version>${lombok.version}</version>
 						</path>
 					</annotationProcessorPaths>
+
 				</configuration>
 			</plugin>
 		</plugins>

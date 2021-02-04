@@ -7,6 +7,7 @@ import academy.devdojo.SpringBoot2.service.AnimeService;
 import academy.devdojo.SpringBoot2.util.AnimeCreator;
 import academy.devdojo.SpringBoot2.util.AnimePostRequestBodyCreator;
 import academy.devdojo.SpringBoot2.util.AnimePutRequestBodyCreator;
+import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,8 @@ class AnimeControllerTest {
 
     @BeforeEach
     void setUp(){
-        PageImpl<Anime> animePage = new PageImpl<>(List.of(AnimeCreator.createValidAnime()));
+        val animePage = new PageImpl<>(List.of(AnimeCreator.createValidAnime()));
+
         BDDMockito.when(animeServiceMock.listAll(ArgumentMatchers.any()))
                 .thenReturn(animePage);
 
