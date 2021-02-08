@@ -15,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,6 +43,13 @@ public class AnimeController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id) {
+        return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
+    }
+
+    @GetMapping(path = "by-id/{id}")
+    public ResponseEntity<Anime> findByIdAuthenticationPrincipal(@PathVariable long id,
+                                                                 @AuthenticationPrincipal UserDetails userDetails) {
+        log.info(userDetails);
         return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
 
