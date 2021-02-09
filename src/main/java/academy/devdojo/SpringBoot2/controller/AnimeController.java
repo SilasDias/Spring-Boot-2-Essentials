@@ -4,8 +4,10 @@ import academy.devdojo.SpringBoot2.domain.Anime;
 import academy.devdojo.SpringBoot2.requests.AnimePostRequestBody;
 import academy.devdojo.SpringBoot2.requests.AnimePutRequestBody;
 import academy.devdojo.SpringBoot2.service.AnimeService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.data.domain.Page;
@@ -32,7 +34,7 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping
-    public ResponseEntity<Page<Anime>> list(Pageable pageable) {
+    public ResponseEntity<Page<Anime>> list(@ParameterObject Pageable pageable) {
         return ResponseEntity.ok(animeService.listAll(pageable));
     }
 
