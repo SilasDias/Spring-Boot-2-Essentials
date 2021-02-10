@@ -3,6 +3,9 @@ server:
     include-stacktrace: on_param
 
 spring:
+  application:
+    name: springboot2-essentials
+
   main:
     allow-bean-definition-overriding: true
 
